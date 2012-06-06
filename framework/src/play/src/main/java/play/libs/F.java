@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
+import static play.core.j.JavaPromise.defaultContext;
+
 /**
  * Defines a set of functional programming style helpers.
  */
@@ -233,7 +235,7 @@ public class F {
                             throw new RuntimeException(t);
                         }
                     }
-                    },null)
+                    },defaultContext())
             );
         }
 
@@ -288,11 +290,11 @@ public class F {
                             throw new RuntimeException(t);
                         }
                     }
-                    },null).flatMap(new scala.runtime.AbstractFunction1<Promise<B>,scala.concurrent.Future<B>>() {
+                    },defaultContext()).flatMap(new scala.runtime.AbstractFunction1<Promise<B>,scala.concurrent.Future<B>>() {
                     public scala.concurrent.Future<B> apply(Promise<B> p) {
                         return p.promise;
                     }
-                        },null)
+                        },defaultContext())
             );
         }
 
@@ -350,7 +352,7 @@ public class F {
                     }
                     return r.right.get();
                 }
-            },null);
+            },defaultContext());
         }
 
         // ExecuteS the Promise functions (capturing exception), with the given ThreadLocal context.

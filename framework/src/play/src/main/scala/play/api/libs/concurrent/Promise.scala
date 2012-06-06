@@ -13,6 +13,7 @@ import scala.collection.mutable.Builder
 import scala.collection._
 import scala.collection.generic.CanBuildFrom
 
+import play.api.libs.concurrent.execution.defaultContext
 
 sealed trait PromiseValue[+A] {
   def isDefined = this match { case Waiting => false; case _ => true }
